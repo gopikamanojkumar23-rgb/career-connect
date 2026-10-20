@@ -1,120 +1,135 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import api, { getErrorMessage } from '../../Services/api'
+import api, { getErrorMessage } from "../../Services/api";
 
 export const fetchSubmissions = createAsyncThunk(
-  'submissions/fetchAll',
+  "submissions/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await api.get('/submissions')
+      const { data } = await api.get("/submissions");
 
-      return data
+      return data;
     } catch (error) {
-      return rejectWithValue(getErrorMessage(error, 'Unable to load submissions'))
+      return rejectWithValue(
+        getErrorMessage(error, "Unable to load submissions"),
+      );
     }
   },
-)
+);
 
 export const createSubmission = createAsyncThunk(
-  'submissions/create',
+  "submissions/create",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.post('/submissions', {
+      const { data } = await api.post("/submissions", {
         ...payload,
         submittedAt: new Date().toISOString().slice(0, 10),
-        status: 'Submitted',
-        feedback: '',
+        status: "Submitted",
+        feedback: "",
         rating: 0,
-      })
+      });
 
-      return data
+      return data;
     } catch (error) {
-      return rejectWithValue(getErrorMessage(error, 'Unable to submit the work'))
+      return rejectWithValue(getErrorMessage(error, "Unable to submit the work"));
     }
   },
-)
+);
 
 export const updateSubmission = createAsyncThunk(
-  'submissions/update',
+  "submissions/update",
   async ({ id, ...payload }, { rejectWithValue }) => {
     try {
-      const { data } = await api.put(`/submissions/${id}`, payload)
+      const { data } = await api.put(`/submissions/${id}`, payload);
 
-      return data
+      return data;
     } catch (error) {
-      return rejectWithValue(getErrorMessage(error, 'Unable to update the submission'))
+      return rejectWithValue(
+        getErrorMessage(error, "Unable to update the submission"),
+      );
     }
   },
-)
+);
 
 export const deleteSubmission = createAsyncThunk(
-  'submissions/delete',
+  "submissions/delete",
   async (id, { rejectWithValue }) => {
     try {
-      await api.delete(`/submissions/${id}`)
+      await api.delete(`/submissions/${id}`);
 
-      return id
+      return id;
     } catch (error) {
-      return rejectWithValue(getErrorMessage(error, 'Unable to remove the submission'))
+      return rejectWithValue(
+        getErrorMessage(error, "Unable to remove the submission"),
+      );
     }
   },
-)
+);
+
+const initialState = {
+  items: [],
+  status: "idle",
+  error: null,
+};
 
 const submissionSlice = createSlice({
-  name: 'submissions',
-  initialState: {
-    items: [],
-    status: 'idle',
-    error: null,
-  },
+  name: "submissions",
+  initialState,
   reducers: {
-    clearSubmissionError(state) {
-      state.error = null
+    clearSubmissionError: (state) => {
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSubmissions.pending, (state) => {
-        state.status = 'loading'
-        state.error = null
+        state.status = "loading";
+        state.error = null;
       })
+
       .addCase(fetchSubmissions.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-        state.items = action.payload
+        state.status = "succeeded";
+        state.items = action.payload;
       })
+
       .addCase(fetchSubmissions.rejected, (state, action) => {
-        state.status = 'failed'
-        state.error = action.payload
+        state.status = "failed";
+        state.error = action.payload;
       })
+
       .addCase(createSubmission.fulfilled, (state, action) => {
-        state.items.push(action.payload)
+        state.items.push(action.payload);
       })
+
       .addCase(createSubmission.rejected, (state, action) => {
-        state.error = action.payload
+        state.error = action.payload;
       })
+
       .addCase(updateSubmission.fulfilled, (state, action) => {
         const index = state.items.findIndex(
           (submission) => submission.id === action.payload.id,
-        )
+        );
 
         if (index !== -1) {
-          state.items[index] = action.payload
+          state.items[index] = action.payload;
         }
       })
+
       .addCase(updateSubmission.rejected, (state, action) => {
-        state.error = action.payload
+        state.error = action.payload;
       })
+
       .addCase(deleteSubmission.fulfilled, (state, action) => {
         state.items = state.items.filter(
           (submission) => submission.id !== action.payload,
-        )
+        );
       })
+
       .addCase(deleteSubmission.rejected, (state, action) => {
-        state.error = action.payload
-      })
+        state.error = action.payload;
+      });
   },
-})
+});
 
-export const { clearSubmissionError } = submissionSlice.actions
-
-export default submissionSlice.reducer
+export const { clearSubmissionError } = submissionSlice.actions;
+export default submissionSlice.reducer;

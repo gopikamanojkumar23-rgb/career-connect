@@ -1,0 +1,5 @@
+Merge the remote redux skeleton and match the slice code style
+
+The remote commit added empty slice files under src/Redux/Slice. Keep the
+working api backed versions and format them like the rest of the redux
+folder: semicolons, double quotes and a module level initial state.

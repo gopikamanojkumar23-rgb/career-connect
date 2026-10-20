@@ -1,12 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
 
-import assignmentReducer from './Slice/assignmentSlice'
-import authReducer, { storeUser } from './Slice/authSlice'
-import notificationReducer from './Slice/notificationSlice'
-import submissionReducer from './Slice/submissionSlice'
-import userReducer from './Slice/userSlice'
+import assignmentReducer from "./Slice/assignmentSlice";
+import authReducer, { storeUser } from "./Slice/authSlice";
+import notificationReducer from "./Slice/notificationSlice";
+import submissionReducer from "./Slice/submissionSlice";
+import userReducer from "./Slice/userSlice";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     auth: authReducer,
     users: userReducer,
@@ -14,11 +14,11 @@ export const store = configureStore({
     submissions: submissionReducer,
     notifications: notificationReducer,
   },
-})
+});
 
 // Keep the signed-in user in localStorage so a refresh keeps the session.
 store.subscribe(() => {
-  storeUser(store.getState().auth.user)
-})
+  storeUser(store.getState().auth.user);
+});
 
-export default store
+export default store;
