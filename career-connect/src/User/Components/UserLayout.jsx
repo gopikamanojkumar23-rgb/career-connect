@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom'
 
 import { fetchAssignments } from '../../Redux/Slice/assignmentSlice'
 import { fetchNotifications } from '../../Redux/Slice/notificationSlice'
+import { fetchStudentContent } from '../../Redux/Slice/studentSlice'
 import { fetchSubmissions } from '../../Redux/Slice/submissionSlice'
 import { fetchUsers } from '../../Redux/Slice/userSlice'
 import UserHeader from './UserHeader'
@@ -19,6 +20,7 @@ function UserLayout() {
     dispatch(fetchAssignments())
     dispatch(fetchSubmissions())
     dispatch(fetchNotifications())
+    dispatch(fetchStudentContent())
   }, [dispatch])
 
   return (

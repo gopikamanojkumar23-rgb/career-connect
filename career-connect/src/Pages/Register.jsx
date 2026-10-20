@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ArrowLeft } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { clearAuthError, register } from '../Redux/Slice/authSlice'
@@ -17,7 +18,7 @@ function Register() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { user, status, error } = useSelector((state) => state.auth)
+  const { status, error } = useSelector((state) => state.auth)
 
   const [form, setForm] = useState({
     name: '',
@@ -27,11 +28,14 @@ function Register() {
     course: courses[0],
   })
 
+  const [registered, setRegistered] = useState(false)
+  const [formError, setFormError] = useState('')
+
   useEffect(() => {
-    if (user) {
-      navigate('/dashboard', { replace: true })
+    if (registered) {
+      navigate('/login', { replace: true, state: { registered: true } })
     }
-  }, [user, navigate])
+  }, [registered, navigate])
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -44,15 +48,30 @@ function Register() {
     dispatch(clearAuthError())
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
 
-    dispatch(register(form))
+    try {
+      await dispatch(register(form)).unwrap()
+
+      setRegistered(true)
+    } catch (error) {
+      dispatch(clearAuthError())
+      setFormError(error)
+    }
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-black px-4 py-10">
       <div className="w-full max-w-md">
+        <Link
+          to="/"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-neutral-400 transition hover:text-yellow-400"
+        >
+          <ArrowLeft size={16} />
+          Back to home
+        </Link>
+
         <Link
           to="/"
           className="mb-8 block text-center text-2xl font-bold tracking-wide text-yellow-400"
@@ -170,6 +189,12 @@ function Register() {
           {error && (
             <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">
               {error}
+            </p>
+          )}
+
+          {formError && (
+            <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+              {formError}
             </p>
           )}
 

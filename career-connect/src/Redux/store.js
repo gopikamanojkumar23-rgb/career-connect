@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import assignmentReducer from "./Slice/assignmentSlice";
 import authReducer, { storeUser } from "./Slice/authSlice";
 import notificationReducer from "./Slice/notificationSlice";
+import studentReducer from "./Slice/studentSlice";
 import submissionReducer from "./Slice/submissionSlice";
 import userReducer from "./Slice/userSlice";
 
@@ -13,6 +14,7 @@ const store = configureStore({
     assignments: assignmentReducer,
     submissions: submissionReducer,
     notifications: notificationReducer,
+    student: studentReducer,
   },
 });
 

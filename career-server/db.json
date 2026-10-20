@@ -87,6 +87,17 @@
       "course": "UI/UX Design",
       "status": "Pending",
       "joined": "2026-05-30"
+    },
+    {
+      "name": "Arjun",
+      "email": "aarrjjuunn444@gmail.com",
+      "password": "123456",
+      "phone": "",
+      "course": "Web Development",
+      "role": "Student",
+      "status": "Active",
+      "joined": "2026-10-20",
+      "id": 9
     }
   ],
   "assignments": [
@@ -267,6 +278,178 @@
       "recipientId": 7,
       "createdAt": "2026-10-13T08:30:00.000Z",
       "read": true
+    }
+  ],
+  "tasks": [
+    {
+      "status": "Completed",
+      "title": "Review CSS grid notes",
+      "course": "Web Development",
+      "id": 1,
+      "dueDate": "2026-10-21"
+    },
+    {
+      "status": "In Progress",
+      "title": "Fix accessibility issues on the portfolio",
+      "course": "Web Development",
+      "id": 2,
+      "dueDate": "2026-10-23"
+    },
+    {
+      "status": "Completed",
+      "title": "Read the Flexbox guide",
+      "course": "Web Development",
+      "id": 3,
+      "dueDate": "2026-10-18"
+    },
+    {
+      "status": "Pending",
+      "title": "Set up the local project repo",
+      "course": "Web Development",
+      "id": 4,
+      "dueDate": "2026-10-26"
+    },
+    {
+      "status": "Completed",
+      "title": "Solve 10 array map exercises",
+      "course": "JavaScript",
+      "id": 5,
+      "dueDate": "2026-10-19"
+    },
+    {
+      "status": "In Progress",
+      "title": "Build a debounce helper",
+      "course": "JavaScript",
+      "id": 6,
+      "dueDate": "2026-10-24"
+    },
+    {
+      "status": "Pending",
+      "title": "Collect colour references",
+      "course": "UI/UX Design",
+      "id": 7,
+      "dueDate": "2026-10-20"
+    },
+    {
+      "status": "Pending",
+      "title": "Sketch the onboarding screens",
+      "course": "UI/UX Design",
+      "id": 8,
+      "dueDate": "2026-10-27"
+    },
+    {
+      "status": "Completed",
+      "title": "Load the dataset into pandas",
+      "course": "Data Science",
+      "id": 9,
+      "dueDate": "2026-10-22"
+    },
+    {
+      "status": "Completed",
+      "title": "Update the LinkedIn headline",
+      "course": "Career Development",
+      "id": 10,
+      "dueDate": "2026-10-17"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "dueDate": "2026-11-15",
+      "progress": 60,
+      "course": "Web Development",
+      "title": "Personal Portfolio Website",
+      "status": "In Progress"
+    },
+    {
+      "id": 2,
+      "dueDate": "2026-12-01",
+      "progress": 10,
+      "course": "Web Development",
+      "title": "Weather Dashboard App",
+      "status": "Pending"
+    },
+    {
+      "id": 3,
+      "dueDate": "2026-11-20",
+      "progress": 100,
+      "course": "JavaScript",
+      "title": "Expense Tracker",
+      "status": "Completed"
+    },
+    {
+      "id": 4,
+      "dueDate": "2026-11-25",
+      "progress": 45,
+      "course": "UI/UX Design",
+      "title": "Fitness App Redesign",
+      "status": "In Progress"
+    },
+    {
+      "id": 5,
+      "dueDate": "2026-11-30",
+      "progress": 5,
+      "course": "Data Science",
+      "title": "Sales Dashboard Notebook",
+      "status": "Pending"
+    },
+    {
+      "id": 6,
+      "dueDate": "2026-10-30",
+      "progress": 70,
+      "course": "Career Development",
+      "title": "LinkedIn Profile Rebuild",
+      "status": "In Progress"
+    }
+  ],
+  "exams": [
+    {
+      "id": 1,
+      "venue": "Room A",
+      "time": "10:00",
+      "date": "2026-11-05",
+      "course": "Web Development",
+      "title": "HTML and CSS Mid Term"
+    },
+    {
+      "id": 2,
+      "venue": "Hall 1",
+      "time": "10:00",
+      "date": "2026-12-12",
+      "course": "Web Development",
+      "title": "Web Development Final"
+    },
+    {
+      "id": 3,
+      "venue": "Room B",
+      "time": "13:00",
+      "date": "2026-11-08",
+      "course": "JavaScript",
+      "title": "JavaScript Fundamentals Exam"
+    },
+    {
+      "id": 4,
+      "venue": "Studio 2",
+      "time": "10:00",
+      "date": "2026-11-12",
+      "course": "UI/UX Design",
+      "title": "UI Principles Exam"
+    },
+    {
+      "id": 5,
+      "venue": "Lab 1",
+      "time": "13:00",
+      "date": "2026-11-15",
+      "course": "Data Science",
+      "title": "Data Handling Exam"
+    },
+    {
+      "id": 6,
+      "venue": "Room C",
+      "time": "09:30",
+      "date": "2026-10-30",
+      "course": "Career Development",
+      "title": "Aptitude Test"
     }
   ]
 }

@@ -165,9 +165,10 @@ const authSlice = createSlice({
         state.error = null;
       })
 
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state) => {
+        // Registering does not sign you in, you go to the login page first.
         state.status = "succeeded";
-        state.user = action.payload;
+        state.error = null;
       })
 
       .addCase(register.rejected, (state, action) => {

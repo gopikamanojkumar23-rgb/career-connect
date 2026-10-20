@@ -1,7 +1,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import {
   clearAuthError,
@@ -46,6 +47,7 @@ function decodeGoogleProfile(credential) {
 function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const { user, status, error } = useSelector((state) => state.auth)
 
@@ -143,6 +145,14 @@ function Login() {
       <div className="w-full max-w-md">
         <Link
           to="/"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-neutral-400 transition hover:text-yellow-400"
+        >
+          <ArrowLeft size={16} />
+          Back to home
+        </Link>
+
+        <Link
+          to="/"
           className="mb-8 block text-center text-2xl font-bold tracking-wide text-yellow-400"
         >
           Career<span className="text-white">Connect</span>
@@ -158,6 +168,12 @@ function Login() {
               Sign in to continue to your dashboard.
             </p>
           </div>
+
+          {location.state?.registered && (
+            <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
+              Your account is ready. Sign in to continue.
+            </p>
+          )}
 
           <div>
             <label
