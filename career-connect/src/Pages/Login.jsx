@@ -58,7 +58,7 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate(user.role === 'Admin' ? '/admin' : '/', { replace: true })
+      navigate(user.role === 'Admin' ? '/admin' : '/dashboard', { replace: true })
     }
   }, [user, navigate])
 

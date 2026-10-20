@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 const menuItems = [
-  { name: 'Dashboard', path: '/', icon: '🏠' },
+  { name: 'Dashboard', path: '/dashboard', icon: '🏠' },
   { name: 'My Assignments', path: '/assignments', icon: '📋' },
   { name: 'My Progress', path: '/progress', icon: '📊' },
   { name: 'Notifications', path: '/notifications', icon: '🔔' },

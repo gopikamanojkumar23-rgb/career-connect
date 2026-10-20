@@ -68,7 +68,7 @@ function AdminHeader({ onToggleSidebar }) {
         <button
           type="button"
           onClick={handleLogout}
-          className="hidden rounded-lg border border-neutral-800 px-3 py-2 text-sm text-neutral-400 transition hover:border-yellow-400 hover:text-yellow-400 sm:block"
+          className="rounded-lg border border-neutral-800 px-3 py-2 text-sm text-neutral-400 transition hover:border-yellow-400 hover:text-yellow-400"
         >
           Sign out
         </button>

@@ -40,14 +40,14 @@ npm run dev        # http://localhost:5173
 
 ## Environment variables
 
-Copy `.env.example` to `.env` and fill it in:
+Both are optional, the app runs without a `.env` file.
 
-```
-VITE_API_URL=http://localhost:3000
-VITE_GOOGLE_CLIENT_ID=
-```
+| Variable                | Default                 | What it does                                  |
+| ----------------------- | ----------------------- | --------------------------------------------- |
+| `VITE_API_URL`          | `http://localhost:3000` | where the career-server api lives             |
+| `VITE_GOOGLE_CLIENT_ID` | empty                   | client id that turns the Google sign in on    |
 
-`VITE_GOOGLE_CLIENT_ID` is the client id from
+`VITE_GOOGLE_CLIENT_ID` comes from
 [Google Cloud credentials](https://console.cloud.google.com/apis/credentials).
 Without it the login page hides the Google button and shows the email and
 password form only.

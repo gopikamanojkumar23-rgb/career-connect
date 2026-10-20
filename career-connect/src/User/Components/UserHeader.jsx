@@ -17,7 +17,7 @@ function UserHeader() {
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-yellow-500/20 bg-black px-4 sm:px-6">
-      <Link to="/" className="text-2xl font-bold tracking-wide text-yellow-400">
+      <Link to="/dashboard" className="text-2xl font-bold tracking-wide text-yellow-400">
         Career<span className="text-white">Connect</span>
       </Link>
 
@@ -50,7 +50,7 @@ function UserHeader() {
         <button
           type="button"
           onClick={handleLogout}
-          className="hidden rounded-lg border border-neutral-800 px-3 py-2 text-sm text-neutral-400 transition hover:border-yellow-400 hover:text-yellow-400 sm:block"
+          className="rounded-lg border border-neutral-800 px-3 py-2 text-sm text-neutral-400 transition hover:border-yellow-400 hover:text-yellow-400"
         >
           Sign out
         </button>

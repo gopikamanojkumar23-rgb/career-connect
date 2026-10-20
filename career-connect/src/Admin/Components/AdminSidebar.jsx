@@ -94,7 +94,7 @@ function AdminSidebar({ isOpen = false, onClose }) {
 
         <div className="border-t border-neutral-800 p-4">
           <Link
-            to="/"
+            to="/dashboard"
             className="block rounded-lg border border-neutral-800 px-3 py-2 text-center text-sm font-medium text-neutral-300 transition hover:border-yellow-400 hover:text-yellow-400"
           >
             Back to student portal

@@ -24,6 +24,7 @@ import Notification from './User/Pages/Notifications'
 import Profile from './User/Pages/Profile'
 import SubmitWork from './User/Pages/SubmitWork'
 
+import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 
@@ -31,6 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -41,7 +43,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<UserDashboard />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
           <Route path="/assignments" element={<MyAssingment />} />
           <Route path="/progress" element={<MyProgress />} />
           <Route path="/notifications" element={<Notification />} />
