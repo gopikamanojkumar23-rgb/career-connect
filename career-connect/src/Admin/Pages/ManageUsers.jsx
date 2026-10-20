@@ -19,11 +19,11 @@ import {
   UserCheck,
   UserCog,
   Users,
-  X,
 } from 'lucide-react'
 
 import { createUser, deleteUser, updateUser } from '../../Redux/Slice/userSlice'
 import { formatDate, getInitials, getUserProgress } from '../../Redux/selectors'
+import { showError, showSuccess } from '../../Services/alert'
 const roles = ['Student', 'Admin']
 const statuses = ['Active', 'Pending', 'Suspended']
 const courses = [
@@ -76,7 +76,6 @@ function ManageUsers() {
   const [formError, setFormError] = useState('')
 
   const [deleteTarget, setDeleteTarget] = useState(null)
-  const [notice, setNotice] = useState('')
 
   const stats = useMemo(() => {
     return {
@@ -120,12 +119,6 @@ function ManageUsers() {
     setSearch('')
     setRoleFilter('All')
     setStatusFilter('All')
-  }
-
-  function showNotice(message) {
-    setNotice(message)
-
-    window.setTimeout(() => setNotice(''), 3000)
   }
 
   function openCreateForm() {
@@ -206,7 +199,7 @@ function ManageUsers() {
           }),
         ).unwrap()
 
-        showNotice(`${name} was added successfully.`)
+        showSuccess(`${name} was added successfully.`)
       } else {
         const changes = {
           id: formValues.id,
@@ -224,7 +217,7 @@ function ManageUsers() {
 
         await dispatch(updateUser(changes)).unwrap()
 
-        showNotice(`${name}'s record was updated.`)
+        showSuccess(`${name}'s record was updated.`)
       }
 
       closeForm()
@@ -237,9 +230,9 @@ function ManageUsers() {
     try {
       await dispatch(updateUser({ id: user.id, role })).unwrap()
 
-      showNotice(`${user.name} is now a ${role}.`)
+      showSuccess(`${user.name} is now a ${role}.`)
     } catch (error) {
-      showNotice(error)
+      showError(error)
     }
   }
 
@@ -249,11 +242,11 @@ function ManageUsers() {
     try {
       await dispatch(updateUser({ id: user.id, status: nextStatus })).unwrap()
 
-      showNotice(
+      showSuccess(
         `${user.name} was ${nextStatus === 'Active' ? 'reactivated' : 'suspended'}.`,
       )
     } catch (error) {
-      showNotice(error)
+      showError(error)
     }
   }
 
@@ -263,9 +256,9 @@ function ManageUsers() {
     try {
       await dispatch(deleteUser(deleteTarget.id)).unwrap()
 
-      showNotice(`${deleteTarget.name} was removed.`)
+      showSuccess(`${deleteTarget.name} was removed.`)
     } catch (error) {
-      showNotice(error)
+      showError(error)
     }
 
     setDeleteTarget(null)
@@ -297,7 +290,7 @@ function ManageUsers() {
 
     URL.revokeObjectURL(url)
 
-    showNotice('User list exported as CSV.')
+    showSuccess('User list exported as CSV.')
   }
 
   const selectClass =
@@ -332,21 +325,6 @@ function ManageUsers() {
           </>
         }
       />
-
-      {notice && (
-        <div className="flex items-center gap-3 rounded-xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-300">
-          <ShieldCheck size={18} className="shrink-0 text-yellow-400" />
-          <span className="flex-1">{notice}</span>
-          <button
-            type="button"
-            onClick={() => setNotice('')}
-            aria-label="Dismiss message"
-            className="rounded p-1 text-yellow-300/70 transition hover:text-yellow-400"
-          >
-            <X size={16} />
-          </button>
-        </div>
-      )}
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <AdminStatCard

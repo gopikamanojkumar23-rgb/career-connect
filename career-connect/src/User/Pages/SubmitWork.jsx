@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createSubmission } from '../../Redux/Slice/submissionSlice'
+import { showSuccess } from '../../Services/alert'
 
 function SubmitWork() {
   const dispatch = useDispatch()
@@ -61,6 +62,8 @@ function SubmitWork() {
           link: form.link.trim(),
         }),
       ).unwrap()
+
+      showSuccess('Work submitted', 'The admin can review it right away.')
 
       setSubmitted(true)
       setForm({ assignmentId: '', description: '', link: '' })

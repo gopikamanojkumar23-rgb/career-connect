@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { clearAuthError, register } from '../Redux/Slice/authSlice'
+import { showSuccess } from '../Services/alert'
 
 const courses = [
   'Web Development',
@@ -54,6 +55,7 @@ function Register() {
     try {
       await dispatch(register(form)).unwrap()
 
+      showSuccess('Account created', 'Sign in to continue to your dashboard.')
       setRegistered(true)
     } catch (error) {
       dispatch(clearAuthError())

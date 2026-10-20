@@ -19,6 +19,7 @@ import {
 
 import { updateSubmission } from '../../Redux/Slice/submissionSlice'
 import { formatDate } from '../../Redux/selectors'
+import { showSuccess } from '../../Services/alert'
 
 const statuses = ['All', 'Submitted', 'Review', 'Completed', 'Rejected']
 
@@ -31,7 +32,6 @@ function Submissions() {
   const [search, setSearch] = useState('')
   const [activeId, setActiveId] = useState(null)
   const [feedback, setFeedback] = useState('')
-  const [notice, setNotice] = useState('')
 
   const stats = useMemo(() => {
     return {
@@ -58,16 +58,10 @@ function Submissions() {
     })
   }, [submissions, statusFilter, search])
 
-  function showNotice(message) {
-    setNotice(message)
-
-    window.setTimeout(() => setNotice(''), 3000)
-  }
-
   async function setStatus(id, status) {
     await dispatch(updateSubmission({ id, status })).unwrap()
 
-    showNotice(`Submission marked as ${status}.`)
+    showSuccess(`Submission marked as ${status}.`)
   }
 
   function openFeedback(item) {
@@ -83,7 +77,7 @@ function Submissions() {
     setActiveId(null)
     setFeedback('')
 
-    showNotice('Feedback sent to the student.')
+    showSuccess('Feedback sent to the student.')
   }
 
   return (
@@ -93,13 +87,6 @@ function Submissions() {
         title="Submissions"
         description="Review what learners have submitted, leave feedback and close the loop."
       />
-
-      {notice && (
-        <div className="flex items-center gap-3 rounded-xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-300">
-          <CheckCircle2 size={18} className="shrink-0 text-yellow-400" />
-          <span className="flex-1">{notice}</span>
-        </div>
-      )}
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <AdminStatCard

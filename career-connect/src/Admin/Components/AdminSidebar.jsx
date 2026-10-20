@@ -1,5 +1,6 @@
 import {
   Bell,
+  CalendarClock,
   ClipboardList,
   FileBarChart,
   FileCheck,
@@ -15,6 +16,7 @@ const menuItems = [
   { name: 'Dashboard', path: '/admin', icon: LayoutDashboard, end: true },
   { name: 'Users', path: '/admin/users', icon: Users },
   { name: 'Assignments', path: '/admin/assignments', icon: ClipboardList },
+  { name: 'Study Plan', path: '/admin/study-plan', icon: CalendarClock },
   { name: 'Submissions', path: '/admin/submissions', icon: FileCheck },
   { name: 'Progress', path: '/admin/progress', icon: TrendingUp },
   { name: 'Notifications', path: '/admin/notifications', icon: Bell },

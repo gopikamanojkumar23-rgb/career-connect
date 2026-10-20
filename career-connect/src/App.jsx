@@ -10,6 +10,7 @@ import AdminFeedback from './Admin/Pages/AdminFeedback'
 import AdminNotifications from './Admin/Pages/AdminNotifications'
 import AdminProgress from './Admin/Pages/AdminProgress'
 import AdminReports from './Admin/Pages/AdminReports'
+import AdminStudyPlan from './Admin/Pages/AdminStudyPlan'
 import CreateAssignments from './Admin/Pages/CreateAssignments'
 import ManageAssignments from './Admin/Pages/ManageAssignments'
 import ManageUsers from './Admin/Pages/ManageUsers'
@@ -62,6 +63,7 @@ function App() {
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/assignments" element={<ManageAssignments />} />
           <Route path="/admin/assignments/create" element={<CreateAssignments />} />
+          <Route path="/admin/study-plan" element={<AdminStudyPlan />} />
           <Route path="/admin/submissions" element={<Submissions />} />
           <Route path="/admin/progress" element={<AdminProgress />} />
           <Route path="/admin/notifications" element={<AdminNotifications />} />

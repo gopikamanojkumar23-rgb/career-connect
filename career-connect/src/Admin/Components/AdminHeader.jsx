@@ -3,6 +3,7 @@ import { Bell, Menu, UserRound } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { logout } from '../../Redux/Slice/authSlice'
+import { showSuccess } from '../../Services/alert'
 
 function AdminHeader({ onToggleSidebar }) {
   const dispatch = useDispatch()
@@ -13,6 +14,7 @@ function AdminHeader({ onToggleSidebar }) {
   function handleLogout() {
     dispatch(logout())
 
+    showSuccess('Signed out', 'See you again soon.')
     navigate('/login')
   }
 

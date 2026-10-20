@@ -29,6 +29,49 @@ export const fetchStudentContent = createAsyncThunk(
   },
 );
 
+export const createStudentItem = createAsyncThunk(
+  "student/create",
+  async ({ type, values }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(`/${type}`, values);
+
+      return { type, item: data };
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error, "Unable to save the record"));
+    }
+  },
+);
+
+export const updateStudentItem = createAsyncThunk(
+  "student/update",
+  async ({ type, id, values }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.put(`/${type}/${id}`, values);
+
+      return { type, item: data };
+    } catch (error) {
+      return rejectWithValue(
+        getErrorMessage(error, "Unable to update the record"),
+      );
+    }
+  },
+);
+
+export const deleteStudentItem = createAsyncThunk(
+  "student/delete",
+  async ({ type, id }, { rejectWithValue }) => {
+    try {
+      await api.delete(`/${type}/${id}`);
+
+      return { type, id };
+    } catch (error) {
+      return rejectWithValue(
+        getErrorMessage(error, "Unable to remove the record"),
+      );
+    }
+  },
+);
+
 const initialState = {
   exams: [],
   tasks: [],
@@ -61,6 +104,39 @@ const studentSlice = createSlice({
 
       .addCase(fetchStudentContent.rejected, (state, action) => {
         state.status = "failed";
+        state.error = action.payload;
+      })
+
+      .addCase(createStudentItem.fulfilled, (state, action) => {
+        const { type, item } = action.payload;
+
+        state[type].push(item);
+      })
+
+      .addCase(createStudentItem.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+
+      .addCase(updateStudentItem.fulfilled, (state, action) => {
+        const { type, item } = action.payload;
+        const index = state[type].findIndex((row) => row.id === item.id);
+
+        if (index !== -1) {
+          state[type][index] = item;
+        }
+      })
+
+      .addCase(updateStudentItem.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+
+      .addCase(deleteStudentItem.fulfilled, (state, action) => {
+        const { type, id } = action.payload;
+
+        state[type] = state[type].filter((row) => row.id !== id);
+      })
+
+      .addCase(deleteStudentItem.rejected, (state, action) => {
         state.error = action.payload;
       });
   },

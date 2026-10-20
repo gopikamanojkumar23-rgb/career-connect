@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { updateUser } from '../../Redux/Slice/userSlice'
+import { showSuccess } from '../../Services/alert'
 
 const courses = [
   'Web Development',
@@ -50,6 +51,8 @@ function ProfileForm({ user }) {
           course: profile.course,
         }),
       ).unwrap()
+
+      showSuccess('Profile saved', 'The admin panel sees the same record.')
 
       setSaved(true)
     } catch (error) {

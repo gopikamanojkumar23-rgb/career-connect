@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 
 import { deleteAssignment } from '../../Redux/Slice/assignmentSlice'
 import { formatDate, getAssignmentProgress } from '../../Redux/selectors'
+import { showSuccess } from '../../Services/alert'
 
 function ManageAssignments() {
   const dispatch = useDispatch()
@@ -40,6 +41,8 @@ function ManageAssignments() {
     if (!deleteTarget) return
 
     await dispatch(deleteAssignment(deleteTarget.id)).unwrap()
+
+    showSuccess('Assignment removed')
 
     setDeleteTarget(null)
   }

@@ -14,6 +14,7 @@ import {
   updateNotification,
 } from '../../Redux/Slice/notificationSlice'
 import { formatDate } from '../../Redux/selectors'
+import { showSuccess } from '../../Services/alert'
 
 const audiences = [
   'All Students',
@@ -36,7 +37,6 @@ function AdminNotifications() {
   const { items: notifications } = useSelector((state) => state.notifications)
 
   const [form, setForm] = useState(emptyForm)
-  const [sent, setSent] = useState(false)
 
   const unread = useMemo(() => {
     return notifications.filter((item) => !item.read).length
@@ -74,9 +74,7 @@ function AdminNotifications() {
     ).unwrap()
 
     setForm(emptyForm)
-    setSent(true)
-
-    window.setTimeout(() => setSent(false), 3000)
+    showSuccess('Notification sent')
   }
 
   return (
@@ -178,12 +176,6 @@ function AdminNotifications() {
                 ))}
               </select>
             </div>
-
-            {sent && (
-              <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
-                Notification sent successfully.
-              </p>
-            )}
 
             <button
               type="submit"

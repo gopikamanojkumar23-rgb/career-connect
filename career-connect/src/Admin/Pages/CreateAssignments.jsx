@@ -8,6 +8,7 @@ import { CalendarDays, ClipboardList, Save } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { createAssignment } from '../../Redux/Slice/assignmentSlice'
+import { showSuccess } from '../../Services/alert'
 
 const courses = [
   'Web Development',
@@ -68,6 +69,8 @@ function CreateAssignments() {
           maxMarks: form.maxMarks,
         }),
       ).unwrap()
+
+      showSuccess('Assignment created', 'Your learners can see it now.')
 
       navigate('/admin/assignments')
     } catch (error) {

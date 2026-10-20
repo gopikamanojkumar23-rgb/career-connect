@@ -9,6 +9,7 @@ import {
   login,
   loginWithGoogle,
 } from '../Redux/Slice/authSlice'
+import { showError, showSuccess } from '../Services/alert'
 
 const demoAccounts = [
   { label: 'Admin', email: 'admin@careerconnect.com', password: 'admin123' },
@@ -74,6 +75,13 @@ function Login() {
       }
 
       dispatch(loginWithGoogle(profile))
+        .unwrap()
+        .then((user) => {
+          showSuccess('Signed in with Google', `Welcome back, ${user.name}`)
+        })
+        .catch((error) => {
+          showError('Google sign-in failed', error)
+        })
     },
     [dispatch],
   )
@@ -128,6 +136,13 @@ function Login() {
     event.preventDefault()
 
     dispatch(login(form))
+      .unwrap()
+      .then((user) => {
+        showSuccess('Logged in successfully', `Welcome back, ${user.name}`)
+      })
+      .catch(() => {
+        // The form already shows the error message.
+      })
   }
 
   function handleDemo(account) {
@@ -138,6 +153,13 @@ function Login() {
 
     dispatch(clearAuthError())
     dispatch(login({ email: account.email, password: account.password }))
+      .unwrap()
+      .then((user) => {
+        showSuccess('Logged in successfully', `Welcome back, ${user.name}`)
+      })
+      .catch(() => {
+        // The form already shows the error message.
+      })
   }
 
   return (
