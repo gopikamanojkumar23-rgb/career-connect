@@ -1,16 +1,97 @@
-# React + Vite
+# CareerConnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A career guidance platform where students manage their assignments and admins
+run the whole thing. Both sides read and write the same records, so a change
+made in the admin panel shows up in the student portal straight away.
 
-Currently, two official plugins are available:
+## Project layout
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+career-connect/     React frontend (Vite)
+career-server/     json-server API on port 3000
+```
 
-## React Compiler
+The API stores four collections in `career-server/db.json`:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Collection     | Used by                                     |
+| -------------- | ------------------------------------------- |
+| `users`        | logins, the admin users page, profiles      |
+| `assignments`  | assignments page, a student's task list     |
+| `submissions`  | the review queue, submit work, progress     |
+| `notifications`| announcements for students and admins       |
 
-## Expanding the ESLint configuration
+## Running it
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Two terminals, the API first:
+
+```bash
+cd career-server
+npm install
+npm start          # http://localhost:3000
+```
+
+```bash
+cd career-connect
+npm install
+npm run dev        # http://localhost:5173
+```
+
+`npm run build` creates a production bundle and `npm run lint` checks the code.
+
+## Environment variables
+
+Copy `.env.example` to `.env` and fill it in:
+
+```
+VITE_API_URL=http://localhost:3000
+VITE_GOOGLE_CLIENT_ID=
+```
+
+`VITE_GOOGLE_CLIENT_ID` is the client id from
+[Google Cloud credentials](https://console.cloud.google.com/apis/credentials).
+Without it the login page hides the Google button and shows the email and
+password form only.
+
+## Signing in
+
+| Role    | Email                      | Password    |
+| ------- | -------------------------- | ----------- |
+| Admin   | `admin@careerconnect.com`  | `admin123`  |
+| Student | `aarav.menon@example.com`  | `aarav123`  |
+
+The login page has one click buttons for both. Google sign-in reuses an
+existing account when the email matches, and creates a student account
+otherwise.
+
+## How the two sides stay in sync
+
+`src/Redux/Slice` holds one slice per collection (`userSlice`, `authSlice`,
+`assignmentSlice`, `submissionSlice`, `notificationSlice`). The slices own the
+api calls and the pages only read from the store.
+
+`src/Redux/selectors.js` has the shared maths, so the admin panel and the
+student portal always work out the same progress numbers from the same rows.
+
+`AdminLayout` and `UserLayout` load the collections when they mount, so every
+page under them works on fresh data.
+
+## Structure
+
+```
+src/
+  Admin/
+    Components/   AdminHeader, AdminSidebar, AdminLayout, AdminUI
+    Pages/        Dashboard, Users, Assignments, Submissions, Progress,
+                  Notifications, Feedback, Reports
+  User/
+    Components/   UserHeader, UserSidebar, UserLayout
+    Pages/        Dashboard, MyAssignments, MyProgress, Notifications,
+                  Profile, SubmitWork
+  Components/    ProtectedRoute, Header, Footer
+  Pages/         Home, Login, Register
+  Redux/
+    Slice/        one slice per collection
+    selectors.js  shared progress and formatting helpers
+    store.js      store setup and session persistence
+  Services/      api.js, the axios instance
+```

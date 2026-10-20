@@ -1,6 +1,272 @@
 {
-  "users": [],
-  "assignments": [],
-  "submissions": [],
-  "notifications": []
+    "users":  [
+                  {
+                      "id":  1,
+                      "name":  "Vikram Shetty",
+                      "email":  "admin@careerconnect.com",
+                      "password":  "admin123",
+                      "phone":  "+91 90000 10001",
+                      "role":  "Admin",
+                      "course":  "Career Development",
+                      "status":  "Active",
+                      "joined":  "2025-11-05"
+                  },
+                  {
+                      "id":  2,
+                      "name":  "Ananya Das",
+                      "email":  "ananya.das@example.com",
+                      "password":  "ananya123",
+                      "phone":  "+91 98765 43211",
+                      "role":  "Student",
+                      "course":  "UI/UX Design",
+                      "status":  "Active",
+                      "joined":  "2026-02-03"
+                  },
+                  {
+                      "id":  3,
+                      "name":  "Arjun Verma",
+                      "email":  "arjun.verma@example.com",
+                      "password":  "arjun123",
+                      "phone":  "+91 98765 43216",
+                      "role":  "Student",
+                      "course":  "JavaScript",
+                      "status":  "Active",
+                      "joined":  "2026-02-17"
+                  },
+                  {
+                      "id":  4,
+                      "name":  "Aarav Menon",
+                      "email":  "aarav.menon@example.com",
+                      "password":  "aarav123",
+                      "phone":  "+91 98765 43210",
+                      "role":  "Student",
+                      "course":  "Web Development",
+                      "status":  "Active",
+                      "joined":  "2026-01-12"
+                  },
+                  {
+                      "id":  5,
+                      "name":  "Meera Nair",
+                      "email":  "meera.nair@example.com",
+                      "password":  "meera123",
+                      "phone":  "+91 98765 43213",
+                      "role":  "Student",
+                      "course":  "Web Development",
+                      "status":  "Active",
+                      "joined":  "2026-01-28"
+                  },
+                  {
+                      "id":  6,
+                      "name":  "Rahul Krishnan",
+                      "email":  "rahul.k@example.com",
+                      "password":  "rahul123",
+                      "phone":  "+91 98765 43212",
+                      "role":  "Student",
+                      "course":  "JavaScript",
+                      "status":  "Pending",
+                      "joined":  "2026-03-21"
+                  },
+                  {
+                      "id":  7,
+                      "name":  "Sneha Iyer",
+                      "email":  "sneha.iyer@example.com",
+                      "password":  "sneha123",
+                      "phone":  "+91 98765 43215",
+                      "role":  "Student",
+                      "course":  "Data Science",
+                      "status":  "Suspended",
+                      "joined":  "2026-04-09"
+                  },
+                  {
+                      "id":  8,
+                      "name":  "Priya Nair",
+                      "email":  "priya.nair@example.com",
+                      "password":  "priya123",
+                      "phone":  "+91 98765 43217",
+                      "role":  "Student",
+                      "course":  "UI/UX Design",
+                      "status":  "Pending",
+                      "joined":  "2026-05-30"
+                  }
+              ],
+    "assignments":  [
+                        {
+                            "id":  1,
+                            "title":  "Portfolio Website",
+                            "description":  "Create a responsive personal portfolio website with at least three sections.",
+                            "course":  "Web Development",
+                            "deadline":  "2026-10-25",
+                            "maxMarks":  100,
+                            "createdAt":  "2026-01-05"
+                        },
+                        {
+                            "id":  2,
+                            "title":  "Resume Preparation",
+                            "description":  "Prepare and review your professional resume.",
+                            "course":  "Career Development",
+                            "deadline":  "2026-10-28",
+                            "maxMarks":  50,
+                            "createdAt":  "2026-01-08"
+                        },
+                        {
+                            "id":  3,
+                            "title":  "React Mini Project",
+                            "description":  "Build a small application using React components.",
+                            "course":  "JavaScript",
+                            "deadline":  "2026-10-15",
+                            "maxMarks":  100,
+                            "createdAt":  "2026-01-12"
+                        },
+                        {
+                            "id":  4,
+                            "title":  "API Integration Task",
+                            "description":  "Consume a REST API and render the response with loading and error states.",
+                            "course":  "JavaScript",
+                            "deadline":  "2026-11-04",
+                            "maxMarks":  75,
+                            "createdAt":  "2026-02-02"
+                        },
+                        {
+                            "id":  5,
+                            "title":  "Mobile App Design",
+                            "description":  "Design a mobile app flow and deliver a polished prototype.",
+                            "course":  "UI/UX Design",
+                            "deadline":  "2026-11-10",
+                            "maxMarks":  80,
+                            "createdAt":  "2026-02-14"
+                        }
+                    ],
+    "submissions":  [
+                        {
+                            "id":  1,
+                            "assignmentId":  1,
+                            "studentId":  4,
+                            "studentName":  "Aarav Menon",
+                            "assignmentTitle":  "Portfolio Website",
+                            "course":  "Web Development",
+                            "description":  "Built a responsive portfolio with hero, projects and contact sections.",
+                            "link":  "https://github.com/aarav/portfolio",
+                            "submittedAt":  "2026-10-18",
+                            "status":  "Submitted",
+                            "feedback":  "",
+                            "rating":  0
+                        },
+                        {
+                            "id":  2,
+                            "assignmentId":  5,
+                            "studentId":  8,
+                            "studentName":  "Priya Nair",
+                            "assignmentTitle":  "Mobile App Design",
+                            "course":  "UI/UX Design",
+                            "description":  "Designed a three screen onboarding flow for a fitness tracker.",
+                            "link":  "https://figma.com/@priya/flow",
+                            "submittedAt":  "2026-10-17",
+                            "status":  "Review",
+                            "feedback":  "",
+                            "rating":  0
+                        },
+                        {
+                            "id":  3,
+                            "assignmentId":  4,
+                            "studentId":  6,
+                            "studentName":  "Rahul Krishnan",
+                            "assignmentTitle":  "API Integration Task",
+                            "course":  "JavaScript",
+                            "description":  "Consumed the JSONPlaceholder API with retry and error handling.",
+                            "link":  "https://github.com/rahul/api-task",
+                            "submittedAt":  "2026-10-16",
+                            "status":  "Completed",
+                            "feedback":  "Excellent API error handling. Keep it up.",
+                            "rating":  5
+                        },
+                        {
+                            "id":  4,
+                            "assignmentId":  1,
+                            "studentId":  5,
+                            "studentName":  "Meera Nair",
+                            "assignmentTitle":  "Portfolio Website",
+                            "course":  "Web Development",
+                            "description":  "Created a portfolio using CSS grid with a dark mode toggle.",
+                            "link":  "https://github.com/meera/portfolio",
+                            "submittedAt":  "2026-10-15",
+                            "status":  "Submitted",
+                            "feedback":  "",
+                            "rating":  0
+                        },
+                        {
+                            "id":  5,
+                            "assignmentId":  3,
+                            "studentId":  7,
+                            "studentName":  "Sneha Iyer",
+                            "assignmentTitle":  "React Mini Project",
+                            "course":  "JavaScript",
+                            "description":  "Built a task board with drag and drop and local persistence.",
+                            "link":  "https://github.com/sneha/task-board",
+                            "submittedAt":  "2026-10-12",
+                            "status":  "Rejected",
+                            "feedback":  "Missing the charts section, please resubmit.",
+                            "rating":  3
+                        },
+                        {
+                            "id":  6,
+                            "assignmentId":  3,
+                            "studentId":  6,
+                            "studentName":  "Rahul Krishnan",
+                            "assignmentTitle":  "React Mini Project",
+                            "course":  "JavaScript",
+                            "description":  "Built a task board with drag and drop and local persistence.",
+                            "link":  "https://github.com/rahul/task-board",
+                            "submittedAt":  "2026-10-11",
+                            "status":  "Completed",
+                            "feedback":  "Clean component structure and good state handling.",
+                            "rating":  5
+                        }
+                    ],
+    "notifications":  [
+                          {
+                              "id":  1,
+                              "title":  "New assignment published",
+                              "message":  "“API Integration Task” is now live for all JavaScript learners.",
+                              "audience":  "JavaScript",
+                              "recipientId":  null,
+                              "createdAt":  "2026-10-20T09:15:00.000Z",
+                              "read":  false
+                          },
+                          {
+                              "id":  2,
+                              "title":  "Deadline reminder",
+                              "message":  "Portfolio Website submissions close in 3 days.",
+                              "audience":  "Web Development",
+                              "recipientId":  null,
+                              "createdAt":  "2026-10-19T17:40:00.000Z",
+                              "read":  false
+                          },
+                          {
+                              "id":  3,
+                              "title":  "Submissions awaiting review",
+                              "message":  "2 submissions are still waiting for feedback.",
+                              "audience":  "Admins",
+                              "recipientId":  null,
+                              "createdAt":  "2026-10-18T11:05:00.000Z",
+                              "read":  true
+                          },
+                          {
+                              "id":  4,
+                              "title":  "Work reviewed",
+                              "message":  "Your React Mini Project was approved. Nice work!",
+                              "audience":  "JavaScript",
+                              "recipientId":  6,
+                              "createdAt":  "2026-10-16T14:20:00.000Z",
+                              "read":  false
+                          },
+                          {
+                              "id":  5,
+                              "title":  "Feedback received",
+                              "message":  "Your task board submission was graded. Check the feedback.",
+                              "audience":  "JavaScript",
+                              "recipientId":  7,
+                              "createdAt":  "2026-10-13T08:30:00.000Z",
+                              "read":  true
+                          }
+                      ]
 }

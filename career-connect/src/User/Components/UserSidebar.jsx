@@ -1,4 +1,5 @@
 
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 const menuItems = [
@@ -11,6 +12,13 @@ const menuItems = [
 ]
 
 function UserSlidebar() {
+  const user = useSelector((state) => state.auth.user)
+
+  const items =
+    user?.role === 'Admin'
+      ? [...menuItems, { name: 'Admin Panel', path: '/admin', icon: '🛠️' }]
+      : menuItems
+
   return (
     <aside className="min-h-[calc(100vh-4rem)] w-56 shrink-0 border-r border-yellow-500/20 bg-neutral-950 p-4 max-sm:w-16 max-sm:px-2">
       <p className="mb-5 px-2 text-xs font-semibold uppercase tracking-widest text-neutral-500 max-sm:hidden">
@@ -18,7 +26,7 @@ function UserSlidebar() {
       </p>
 
       <nav className="space-y-2">
-        {menuItems.map((item) => (
+        {items.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
