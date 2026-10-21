@@ -40,7 +40,8 @@ export const updateNotification = createAsyncThunk(
   "notifications/update",
   async ({ id, ...payload }, { rejectWithValue }) => {
     try {
-      const { data } = await api.put(`/notifications/${id}`, payload);
+      const { data: current } = await api.get(`/notifications/${id}`);
+      const { data } = await api.put(`/notifications/${id}`, { ...current, ...payload });
 
       return data;
     } catch (error) {

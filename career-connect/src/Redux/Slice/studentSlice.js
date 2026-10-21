@@ -45,7 +45,8 @@ export const updateStudentItem = createAsyncThunk(
   "student/update",
   async ({ type, id, values }, { rejectWithValue }) => {
     try {
-      const { data } = await api.put(`/${type}/${id}`, values);
+      const { data: current } = await api.get(`/${type}/${id}`);
+      const { data } = await api.put(`/${type}/${id}`, { ...current, ...values });
 
       return { type, item: data };
     } catch (error) {

@@ -16,6 +16,7 @@ import Submissions from './Admin/Pages/Submissions'
 import UserLayout from './User/Components/UserLayout'
 import UserDashboard from './User/Pages/UserDashboard'
 import MyAssingment from './User/Pages/MyAssignments'
+import MyFeedback from './User/Pages/MyFeedback'
 import MyProgress from './User/Pages/MyProgress'
 import Notification from './User/Pages/Notifications'
 import Profile from './User/Pages/Profile'
@@ -44,6 +45,7 @@ function App() {
           <Route path="/assignments" element={<MyAssingment />} />
           <Route path="/progress" element={<MyProgress />} />
           <Route path="/notifications" element={<Notification />} />
+          <Route path="/feedback" element={<MyFeedback />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/submit-work" element={<SubmitWork />} />
         </Route>

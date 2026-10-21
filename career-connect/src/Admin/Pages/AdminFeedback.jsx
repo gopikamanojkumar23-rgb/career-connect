@@ -1,50 +1,34 @@
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CheckCircle2, MessageSquare, Reply, Star } from 'lucide-react'
+import { CheckCircle2, MessageSquare, Reply, Star, Trash2 } from 'lucide-react'
+import Swal from 'sweetalert2'
 
 import { AdminPageHeader, AdminStatCard, StatusBadge } from '../Components/AdminUI'
-import { updateSubmission } from '../../Redux/Slice/submissionSlice'
-import { formatDate, getInitials } from '../../Redux/selectors'
-
-const avatarTones = [
-  'bg-yellow-400/15 text-yellow-400',
-  'bg-sky-500/15 text-sky-400',
-  'bg-emerald-500/15 text-emerald-400',
-  'bg-violet-500/15 text-violet-400',
-  'bg-orange-500/15 text-orange-400',
-  'bg-rose-500/15 text-rose-400',
-]
-
-function getTone(name = '') {
-  const total = name.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0)
-
-  return avatarTones[total % avatarTones.length]
-}
+import { deleteFeedback, updateFeedback } from '../../Redux/Slice/feedbackSlice'
+import { formatDate } from '../../Redux/selectors'
 
 function AdminFeedback() {
   const dispatch = useDispatch()
 
-  const { items: submissions } = useSelector((state) => state.submissions)
+  const { items: feedback } = useSelector((state) => state.feedback)
 
   const [activeId, setActiveId] = useState(null)
   const [reply, setReply] = useState('')
 
-  const feedbackList = useMemo(() => {
-    return submissions
-      .filter((item) => item.feedback || item.rating > 0)
-      .map((item) => ({
-        ...item,
-        topic: item.status === 'Rejected' ? 'Assignment Feedback' : 'Graded Work',
-      }))
-  }, [submissions])
+  const stats = useMemo(() => {
+    const average = feedback.length
+      ? (
+          feedback.reduce((sum, item) => sum + (item.rating || 0), 0) /
+          feedback.length
+        ).toFixed(1)
+      : '0.0'
 
-  const open = feedbackList.filter((item) => !item.reply).length
-  const average = feedbackList.length
-    ? (
-        feedbackList.reduce((sum, item) => sum + (item.rating || 0), 0) /
-        feedbackList.length
-      ).toFixed(1)
-    : '0.0'
+    return {
+      total: feedback.length,
+      open: feedback.filter((item) => !item.reply).length,
+      average,
+    }
+  }, [feedback])
 
   function openReply(item) {
     setActiveId(item.id)
@@ -55,11 +39,19 @@ function AdminFeedback() {
     if (activeId === null) return
 
     await dispatch(
-      updateSubmission({ id: activeId, reply: reply.trim() }),
+      updateFeedback({ id: activeId, reply: reply.trim() }),
     ).unwrap()
 
     setActiveId(null)
     setReply('')
+
+    Swal.fire('Reply sent to the student')
+  }
+
+  async function removeFeedback(item) {
+    await dispatch(deleteFeedback(item.id)).unwrap()
+
+    Swal.fire('Feedback removed')
   }
 
   return (
@@ -67,90 +59,78 @@ function AdminFeedback() {
       <AdminPageHeader
         eyebrow="Voice of the learner"
         title="Feedback"
-        description="Read what students are saying and close the loop with a reply."
+        description="What the students are telling you. Reply so they know it was read."
       />
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <AdminStatCard
           title="Total Feedback"
-          value={feedbackList.length}
+          value={stats.total}
           icon={MessageSquare}
           tone="yellow"
         />
         <AdminStatCard
           title="Awaiting Reply"
-          value={open}
+          value={stats.open}
           icon={Reply}
           tone="orange"
         />
         <AdminStatCard
           title="Average Rating"
-          value={average}
+          value={stats.average}
           icon={Star}
           tone="green"
         />
       </section>
 
-      {feedbackList.length === 0 ? (
+      {feedback.length === 0 ? (
         <section className="rounded-xl border border-dashed border-neutral-800 bg-neutral-900 p-12 text-center">
           <MessageSquare size={28} className="mx-auto text-neutral-600" />
-          <h2 className="mt-4 text-lg font-semibold text-white">
-            No feedback yet
-          </h2>
+          <h2 className="mt-4 text-lg font-semibold text-white">No feedback yet</h2>
           <p className="mt-2 text-sm text-neutral-500">
-            Feedback shows up here once submissions are graded.
+            Students can send feedback from their dashboard.
           </p>
         </section>
       ) : (
         <section className="space-y-4">
-          {feedbackList.map((item) => (
+          {feedback.map((item) => (
             <article
               key={item.id}
               className="rounded-xl border border-neutral-800 bg-neutral-900 p-5"
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${getTone(item.studentName)}`}
-                  >
-                    {getInitials(item.studentName)}
-                  </span>
-
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h2 className="font-semibold text-white">
-                        {item.studentName}
-                      </h2>
-                      <StatusBadge
-                        value={item.reply ? 'Resolved' : 'Open'}
-                      />
-                    </div>
-
-                    <p className="mt-1 text-xs text-neutral-500">
-                      {item.topic} · {item.assignmentTitle} ·{' '}
-                      {formatDate(item.submittedAt)}
-                    </p>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="font-semibold text-white">
+                      {item.studentName}
+                    </h2>
+                    <StatusBadge value={item.reply ? 'Resolved' : 'Open'} />
                   </div>
+
+                  <p className="mt-1 text-xs text-neutral-500">
+                    {item.subject} · {item.course} ·{' '}
+                    {formatDate(item.createdAt)}
+                  </p>
                 </div>
 
                 <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }, (_, index) => (
+                  {[1, 2, 3, 4, 5].map((star) => (
                     <Star
-                      key={index}
+                      key={star}
                       size={15}
                       className={
-                        index < item.rating
+                        star <= item.rating
                           ? 'text-yellow-400'
                           : 'text-neutral-700'
                       }
-                      fill={index < item.rating ? 'currentColor' : 'none'}
+                      fill={star <= item.rating ? 'currentColor' : 'none'}
                     />
                   ))}
                 </div>
               </div>
 
               <p className="mt-4 rounded-lg border border-neutral-800 bg-neutral-950 p-4 text-sm leading-relaxed text-neutral-300">
-                {item.feedback}
+                {item.message}
               </p>
 
               {item.reply && (
@@ -177,9 +157,9 @@ function AdminFeedback() {
                     type="button"
                     onClick={() =>
                       dispatch(
-                        updateSubmission({
+                        updateFeedback({
                           id: item.id,
-                          reply: 'Thanks for the feedback! We will get back to you soon.',
+                          reply: 'Thanks for the feedback, we will get back to you soon.',
                         }),
                       )
                     }
@@ -189,6 +169,15 @@ function AdminFeedback() {
                     Mark resolved
                   </button>
                 )}
+
+                <button
+                  type="button"
+                  onClick={() => removeFeedback(item)}
+                  aria-label={`Remove feedback from ${item.studentName}`}
+                  className="ml-auto rounded-lg p-2 text-neutral-400 transition hover:bg-red-500/10 hover:text-red-400"
+                >
+                  <Trash2 size={16} />
+                </button>
               </div>
 
               {activeId === item.id && (

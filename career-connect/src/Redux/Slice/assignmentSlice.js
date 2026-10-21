@@ -39,7 +39,8 @@ export const updateAssignment = createAsyncThunk(
   "assignments/update",
   async ({ id, ...payload }, { rejectWithValue }) => {
     try {
-      const { data } = await api.put(`/assignments/${id}`, payload);
+      const { data: current } = await api.get(`/assignments/${id}`);
+      const { data } = await api.put(`/assignments/${id}`, { ...current, ...payload });
 
       return data;
     } catch (error) {

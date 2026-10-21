@@ -34,7 +34,8 @@ export const updateUser = createAsyncThunk(
   "users/update",
   async ({ id, ...payload }, { rejectWithValue }) => {
     try {
-      const { data } = await api.put(`/users/${id}`, payload);
+      const { data: current } = await api.get(`/users/${id}`);
+      const { data } = await api.put(`/users/${id}`, { ...current, ...payload });
 
       return data;
     } catch (error) {

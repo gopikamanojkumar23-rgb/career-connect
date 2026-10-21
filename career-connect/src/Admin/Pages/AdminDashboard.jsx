@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { ArrowUpRight, CheckCircle2, ClipboardList, Clock, FileCheck, TrendingUp, Users } from 'lucide-react'
+import { CheckCircle2, ClipboardList, Clock, FileCheck, TrendingUp, Users } from 'lucide-react'
 
 import { AdminPageHeader, AdminStatCard, StatusBadge } from '../Components/AdminUI'
 import { formatDate, getInitials, getOverallCompletion } from '../../Redux/selectors'
@@ -85,42 +85,6 @@ function AdminDashboard() {
         title="Dashboard"
         description="Here’s what’s happening with your platform today."
       />
-
-      <section className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-neutral-900 to-black p-6 sm:p-8">
-        <div className="relative z-10 max-w-2xl">
-          <span className="text-xs font-semibold tracking-widest text-yellow-400 uppercase">
-            CareerConnect Admin
-          </span>
-
-          <h2 className="mt-3 text-2xl font-bold text-white sm:text-3xl">
-            Welcome back, Admin!
-          </h2>
-
-          <p className="mt-3 text-sm leading-relaxed text-neutral-400">
-            Manage students, review submissions, and keep learning progress on
-            track.
-          </p>
-
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs font-medium text-yellow-400">
-              <span className="h-2 w-2 rounded-full bg-yellow-400" />
-              Admin Workspace
-            </span>
-
-            <span className="inline-flex items-center gap-2 text-xs text-neutral-500">
-              <ArrowUpRight size={14} />
-              {users.length} accounts on career-server
-            </span>
-          </div>
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-10 -right-10 hidden h-56 w-56 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-400/5 sm:flex"
-        >
-          <TrendingUp size={44} className="text-yellow-400/70" />
-        </div>
-      </section>
 
       <section>
         <div className="mb-4">

@@ -6,6 +6,7 @@ const menuItems = [
   { name: 'My Assignments', path: '/assignments', icon: '📋' },
   { name: 'My Progress', path: '/progress', icon: '📊' },
   { name: 'Notifications', path: '/notifications', icon: '🔔' },
+  { name: 'My Feedback', path: '/feedback', icon: '💬' },
   { name: 'Profile', path: '/profile', icon: '👤' },
   { name: 'Submit Work', path: '/submit-work', icon: '📤' },
 ]

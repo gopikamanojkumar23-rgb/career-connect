@@ -39,7 +39,8 @@ export const updateSubmission = createAsyncThunk(
   "submissions/update",
   async ({ id, ...payload }, { rejectWithValue }) => {
     try {
-      const { data } = await api.put(`/submissions/${id}`, payload);
+      const { data: current } = await api.get(`/submissions/${id}`);
+      const { data } = await api.put(`/submissions/${id}`, { ...current, ...payload });
 
       return data;
     } catch (error) {

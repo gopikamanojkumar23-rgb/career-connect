@@ -11,14 +11,18 @@ career-connect/     React frontend (Vite)
 career-server/     json-server API on port 3000
 ```
 
-The API stores four collections in `career-server/db.json`:
+The API stores eight collections in `career-server/db.json`:
 
-| Collection     | Used by                                     |
-| -------------- | ------------------------------------------- |
-| `users`        | logins, the admin users page, profiles      |
-| `assignments`  | assignments page, a student's task list     |
-| `submissions`  | the review queue, submit work, progress     |
-| `notifications`| announcements for students and admins       |
+| Collection     | Used by                                        |
+| -------------- | ---------------------------------------------- |
+| `users`        | logins, the admin users page, profiles         |
+| `assignments`  | assignments page, a student's task list        |
+| `submissions`  | the review queue, submit work, progress        |
+| `notifications`| announcements for students and admins          |
+| `tasks`        | the small steps on a student's dashboard       |
+| `projects`     | what a student is building                     |
+| `exams`        | exam dates, times and venues                   |
+| `feedback`     | what students tell the admin, and the replies  |
 
 ## Running it
 
@@ -74,8 +78,9 @@ a student account otherwise.
 ## How the two sides stay in sync
 
 `src/Redux/Slice` holds one slice per collection (`userSlice`, `authSlice`,
-`assignmentSlice`, `submissionSlice`, `notificationSlice`). The slices own the
-api calls and the pages only read from the store.
+`assignmentSlice`, `submissionSlice`, `notificationSlice`, `studentSlice`,
+`feedbackSlice`). The slices own the api calls and the pages only read from
+the store.
 
 `src/Redux/selectors.js` has the shared maths, so the admin panel and the
 student portal always work out the same progress numbers from the same rows.
@@ -83,19 +88,23 @@ student portal always work out the same progress numbers from the same rows.
 `AdminLayout` and `UserLayout` load the collections when they mount, so every
 page under them works on fresh data.
 
+Note that json-server replaces the whole record on `PUT`, so every update
+slice reads the record first and sends the merged version back. Otherwise a
+partial update like `status` would wipe the other fields.
+
 ## Structure
 
 ```
 src/
   Admin/
     Components/   AdminHeader, AdminSidebar, AdminLayout, AdminUI
-    Pages/        Dashboard, Users, Assignments, Submissions, Progress,
-                  Notifications, Feedback, Reports
+    Pages/        Dashboard, Users, Assignments, Study Plan, Submissions,
+                  Progress, Notifications, Feedback, Reports
   User/
     Components/   UserHeader, UserSidebar, UserLayout
     Pages/        Dashboard, MyAssignments, MyProgress, Notifications,
-                  Profile, SubmitWork
-  Components/    ProtectedRoute, Header, Footer
+                  MyFeedback, Profile, SubmitWork
+  Components/    ProtectedRoute
   Pages/         Home, Login, Register
   Redux/
     Slice/        one slice per collection
