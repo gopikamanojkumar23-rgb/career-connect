@@ -1,29 +1,12 @@
-import {
-  AdminModal,
-  AdminPageHeader,
-  AdminStatCard,
-  ConfirmDialog,
-  StatusBadge,
-} from '../Components/AdminUI'
-
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Download,
-  Pencil,
-  Plus,
-  RotateCcw,
-  Search,
-  ShieldCheck,
-  Trash2,
-  UserCheck,
-  UserCog,
-  Users,
-} from 'lucide-react'
+import { Download, Pencil, Plus, RotateCcw, Search, ShieldCheck, Trash2, UserCheck, UserCog, Users } from 'lucide-react'
+import Swal from 'sweetalert2'
 
+import { AdminModal, AdminPageHeader, AdminStatCard, ConfirmDialog, StatusBadge } from '../Components/AdminUI'
 import { createUser, deleteUser, updateUser } from '../../Redux/Slice/userSlice'
 import { formatDate, getInitials, getUserProgress } from '../../Redux/selectors'
-import Swal from 'sweetalert2'
+
 const roles = ['Student', 'Admin']
 const statuses = ['Active', 'Pending', 'Suspended']
 const courses = [

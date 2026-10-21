@@ -1,21 +1,10 @@
-import {
-  AdminPageHeader,
-  AdminStatCard,
-} from '../Components/AdminUI'
-
 import { useMemo, useState } from 'react'
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  Tooltip,
-} from 'chart.js'
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from 'chart.js'
 import { useSelector } from 'react-redux'
 import { Download, FileBarChart, TrendingUp, Users } from 'lucide-react'
 import { Bar } from 'react-chartjs-2'
 
+import { AdminPageHeader, AdminStatCard } from '../Components/AdminUI'
 import { getOverallCompletion } from '../../Redux/selectors'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)

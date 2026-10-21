@@ -1,26 +1,9 @@
-import {
-  AdminPageHeader,
-  AdminStatCard,
-  StatusBadge,
-} from '../Components/AdminUI'
-
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  ClipboardList,
-  Clock,
-  FileCheck,
-  TrendingUp,
-  Users,
-} from 'lucide-react'
+import { ArrowUpRight, CheckCircle2, ClipboardList, Clock, FileCheck, TrendingUp, Users } from 'lucide-react'
 
-import {
-  formatDate,
-  getInitials,
-  getOverallCompletion,
-} from '../../Redux/selectors'
+import { AdminPageHeader, AdminStatCard, StatusBadge } from '../Components/AdminUI'
+import { formatDate, getInitials, getOverallCompletion } from '../../Redux/selectors'
 
 const avatarTones = [
   'bg-yellow-400/15 text-yellow-400',

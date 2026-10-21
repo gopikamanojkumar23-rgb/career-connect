@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import { logout } from '../../Redux/Slice/authSlice'
-import Swal from 'sweetalert2'
 
 function UserHeader() {
   const dispatch = useDispatch()

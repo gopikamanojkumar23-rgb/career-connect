@@ -1,15 +1,4 @@
-import {
-  Bell,
-  CalendarClock,
-  ClipboardList,
-  FileBarChart,
-  FileCheck,
-  LayoutDashboard,
-  MessageSquare,
-  TrendingUp,
-  Users,
-  X,
-} from 'lucide-react'
+import { Bell, CalendarClock, ClipboardList, FileBarChart, FileCheck, LayoutDashboard, MessageSquare, TrendingUp, Users, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 
 const menuItems = [

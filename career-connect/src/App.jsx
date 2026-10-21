@@ -1,9 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import './App.css'
-
 import ProtectedRoute from './Components/ProtectedRoute'
-
 import AdminLayout from './Admin/Components/AdminLayout'
 import AdminDashboard from './Admin/Pages/AdminDashboard'
 import AdminFeedback from './Admin/Pages/AdminFeedback'
@@ -15,20 +13,16 @@ import CreateAssignments from './Admin/Pages/CreateAssignments'
 import ManageAssignments from './Admin/Pages/ManageAssignments'
 import ManageUsers from './Admin/Pages/ManageUsers'
 import Submissions from './Admin/Pages/Submissions'
-
 import UserLayout from './User/Components/UserLayout'
-
 import UserDashboard from './User/Pages/UserDashboard'
 import MyAssingment from './User/Pages/MyAssignments'
 import MyProgress from './User/Pages/MyProgress'
 import Notification from './User/Pages/Notifications'
 import Profile from './User/Pages/Profile'
 import SubmitWork from './User/Pages/SubmitWork'
-
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
-
 import { ROLES } from './Redux/Slice/authSlice'
 
 function App() {

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Bell, Menu, UserRound } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import { logout } from '../../Redux/Slice/authSlice'
-import Swal from 'sweetalert2'
 
 function AdminHeader({ onToggleSidebar }) {
   const dispatch = useDispatch()

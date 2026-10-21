@@ -1,9 +1,8 @@
-
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArrowLeft } from 'lucide-react'
-import Swal from 'sweetalert2'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import { clearAuthError, register, ROLES } from '../Redux/Slice/authSlice'
 

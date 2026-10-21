@@ -1,12 +1,8 @@
-import {
-  AdminPageHeader,
-  AdminStatCard,
-} from '../Components/AdminUI'
-
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Award, CheckCircle2, Clock, TrendingUp, Users } from 'lucide-react'
 
+import { AdminPageHeader, AdminStatCard } from '../Components/AdminUI'
 import { getInitials, getOverallCompletion } from '../../Redux/selectors'
 
 function AdminProgress() {

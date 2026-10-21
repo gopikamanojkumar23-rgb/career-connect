@@ -1,28 +1,11 @@
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  CalendarClock,
-  FolderKanban,
-  ListTodo,
-  Pencil,
-  Plus,
-  Search,
-  Trash2,
-} from 'lucide-react'
-
-import {
-  AdminModal,
-  AdminPageHeader,
-  ConfirmDialog,
-  StatusBadge,
-} from '../Components/AdminUI'
-import {
-  createStudentItem,
-  deleteStudentItem,
-  updateStudentItem,
-} from '../../Redux/Slice/studentSlice'
-import { formatDate } from '../../Redux/selectors'
+import { CalendarClock, FolderKanban, ListTodo, Pencil, Plus, Search, Trash2 } from 'lucide-react'
 import Swal from 'sweetalert2'
+
+import { AdminModal, AdminPageHeader, ConfirmDialog, StatusBadge } from '../Components/AdminUI'
+import { createStudentItem, deleteStudentItem, updateStudentItem } from '../../Redux/Slice/studentSlice'
+import { formatDate } from '../../Redux/selectors'
 
 const courses = [
   'Web Development',

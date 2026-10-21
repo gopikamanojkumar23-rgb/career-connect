@@ -1,18 +1,12 @@
-import {
-  AdminPageHeader,
-  AdminStatCard,
-  ConfirmDialog,
-  StatusBadge,
-} from '../Components/AdminUI'
-
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CalendarDays, ClipboardList, Plus, Search, Trash2, Users } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
+import { AdminPageHeader, AdminStatCard, ConfirmDialog, StatusBadge } from '../Components/AdminUI'
 import { deleteAssignment } from '../../Redux/Slice/assignmentSlice'
 import { formatDate, getAssignmentProgress } from '../../Redux/selectors'
-import Swal from 'sweetalert2'
 
 function ManageAssignments() {
   const dispatch = useDispatch()

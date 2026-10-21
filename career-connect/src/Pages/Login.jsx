@@ -1,16 +1,10 @@
-
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArrowLeft } from 'lucide-react'
-import Swal from 'sweetalert2'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
-import {
-  clearAuthError,
-  login,
-  loginWithGoogle,
-  ROLES,
-} from '../Redux/Slice/authSlice'
+import { clearAuthError, login, loginWithGoogle, ROLES } from '../Redux/Slice/authSlice'
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
 

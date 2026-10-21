@@ -1,25 +1,11 @@
-
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
-import {
-  CalendarClock,
-  CheckCircle2,
-  ClipboardList,
-  FolderKanban,
-  ListTodo,
-} from 'lucide-react'
+import { CalendarClock, CheckCircle2, ClipboardList, FolderKanban, ListTodo } from 'lucide-react'
 import { Doughnut } from 'react-chartjs-2'
 import { Link } from 'react-router-dom'
 
-import {
-  formatDate,
-  getCompletionOverview,
-  getMyProjects,
-  getOpenTasks,
-  getUpcomingExams,
-  getUserProgress,
-} from '../../Redux/selectors'
+import { formatDate, getCompletionOverview, getMyProjects, getOpenTasks, getUpcomingExams, getUserProgress } from '../../Redux/selectors'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 

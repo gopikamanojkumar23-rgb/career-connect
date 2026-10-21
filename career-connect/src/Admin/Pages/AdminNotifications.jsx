@@ -1,20 +1,11 @@
-import {
-  AdminPageHeader,
-  AdminStatCard,
-  StatusBadge,
-} from '../Components/AdminUI'
-
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Bell, CheckCheck, Send, Trash2 } from 'lucide-react'
-
-import {
-  createNotification,
-  deleteNotification,
-  updateNotification,
-} from '../../Redux/Slice/notificationSlice'
-import { formatDate } from '../../Redux/selectors'
 import Swal from 'sweetalert2'
+
+import { AdminPageHeader, AdminStatCard, StatusBadge } from '../Components/AdminUI'
+import { createNotification, deleteNotification, updateNotification } from '../../Redux/Slice/notificationSlice'
+import { formatDate } from '../../Redux/selectors'
 
 const audiences = [
   'All Students',
