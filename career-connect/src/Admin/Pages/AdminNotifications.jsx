@@ -14,7 +14,7 @@ import {
   updateNotification,
 } from '../../Redux/Slice/notificationSlice'
 import { formatDate } from '../../Redux/selectors'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 const audiences = [
   'All Students',
@@ -74,7 +74,7 @@ function AdminNotifications() {
     ).unwrap()
 
     setForm(emptyForm)
-    showSuccess('Notification sent')
+    Swal.fire('Notification sent')
   }
 
   return (

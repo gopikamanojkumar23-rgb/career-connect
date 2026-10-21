@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createSubmission } from '../../Redux/Slice/submissionSlice'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 function SubmitWork() {
   const dispatch = useDispatch()
@@ -63,7 +63,11 @@ function SubmitWork() {
         }),
       ).unwrap()
 
-      showSuccess('Work submitted', 'The admin can review it right away.')
+      Swal.fire({
+        icon: 'success',
+        title: 'Work submitted',
+        text: 'The admin can review it right away.',
+      })
 
       setSubmitted(true)
       setForm({ assignmentId: '', description: '', link: '' })

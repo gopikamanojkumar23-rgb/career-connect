@@ -19,7 +19,7 @@ import {
 
 import { updateSubmission } from '../../Redux/Slice/submissionSlice'
 import { formatDate } from '../../Redux/selectors'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 const statuses = ['All', 'Submitted', 'Review', 'Completed', 'Rejected']
 
@@ -61,7 +61,7 @@ function Submissions() {
   async function setStatus(id, status) {
     await dispatch(updateSubmission({ id, status })).unwrap()
 
-    showSuccess(`Submission marked as ${status}.`)
+    Swal.fire(`Submission marked as ${status}.`)
   }
 
   function openFeedback(item) {
@@ -77,7 +77,7 @@ function Submissions() {
     setActiveId(null)
     setFeedback('')
 
-    showSuccess('Feedback sent to the student.')
+    Swal.fire('Feedback sent to the student.')
   }
 
   return (

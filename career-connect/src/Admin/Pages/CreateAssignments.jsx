@@ -8,7 +8,7 @@ import { CalendarDays, ClipboardList, Save } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { createAssignment } from '../../Redux/Slice/assignmentSlice'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 const courses = [
   'Web Development',
@@ -70,7 +70,11 @@ function CreateAssignments() {
         }),
       ).unwrap()
 
-      showSuccess('Assignment created', 'Your learners can see it now.')
+      Swal.fire({
+        icon: 'success',
+        title: 'Assignment created',
+        text: 'Your learners can see it now.',
+      })
 
       navigate('/admin/assignments')
     } catch (error) {

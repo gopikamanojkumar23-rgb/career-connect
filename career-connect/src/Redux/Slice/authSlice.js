@@ -2,6 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import api, { getErrorMessage } from "../../Services/api";
 
+export const ROLES = {
+  ADMIN: "Admin",
+  STUDENT: "Student",
+};
+
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
@@ -31,7 +36,10 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "auth/register",
-  async ({ name, email, password, phone, course }, { rejectWithValue }) => {
+  async (
+    { name, email, password, phone, course, role },
+    { rejectWithValue },
+  ) => {
     try {
       const { data: existing } = await api.get("/users", { params: { email } });
 
@@ -45,7 +53,7 @@ export const register = createAsyncThunk(
         password,
         phone,
         course,
-        role: "Student",
+        role: role === ROLES.ADMIN ? ROLES.ADMIN : ROLES.STUDENT,
         status: "Active",
         joined: new Date().toISOString().slice(0, 10),
       });
@@ -77,7 +85,7 @@ export const loginWithGoogle = createAsyncThunk(
         phone: "",
         password: "",
         picture: picture || "",
-        role: "Student",
+        role: ROLES.STUDENT,
         course: "Web Development",
         status: "Active",
         joined: new Date().toISOString().slice(0, 10),

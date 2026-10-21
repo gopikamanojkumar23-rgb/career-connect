@@ -23,7 +23,7 @@ import {
 
 import { createUser, deleteUser, updateUser } from '../../Redux/Slice/userSlice'
 import { formatDate, getInitials, getUserProgress } from '../../Redux/selectors'
-import { showError, showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 const roles = ['Student', 'Admin']
 const statuses = ['Active', 'Pending', 'Suspended']
 const courses = [
@@ -199,7 +199,7 @@ function ManageUsers() {
           }),
         ).unwrap()
 
-        showSuccess(`${name} was added successfully.`)
+        Swal.fire(`${name} was added successfully.`)
       } else {
         const changes = {
           id: formValues.id,
@@ -217,7 +217,7 @@ function ManageUsers() {
 
         await dispatch(updateUser(changes)).unwrap()
 
-        showSuccess(`${name}'s record was updated.`)
+        Swal.fire(`${name}'s record was updated.`)
       }
 
       closeForm()
@@ -230,9 +230,9 @@ function ManageUsers() {
     try {
       await dispatch(updateUser({ id: user.id, role })).unwrap()
 
-      showSuccess(`${user.name} is now a ${role}.`)
+      Swal.fire(`${user.name} is now a ${role}.`)
     } catch (error) {
-      showError(error)
+      Swal.fire({ icon: 'error', title: 'Something went wrong', text: error })
     }
   }
 
@@ -242,11 +242,11 @@ function ManageUsers() {
     try {
       await dispatch(updateUser({ id: user.id, status: nextStatus })).unwrap()
 
-      showSuccess(
+      Swal.fire(
         `${user.name} was ${nextStatus === 'Active' ? 'reactivated' : 'suspended'}.`,
       )
     } catch (error) {
-      showError(error)
+      Swal.fire({ icon: 'error', title: 'Something went wrong', text: error })
     }
   }
 
@@ -256,9 +256,9 @@ function ManageUsers() {
     try {
       await dispatch(deleteUser(deleteTarget.id)).unwrap()
 
-      showSuccess(`${deleteTarget.name} was removed.`)
+      Swal.fire(`${deleteTarget.name} was removed.`)
     } catch (error) {
-      showError(error)
+      Swal.fire({ icon: 'error', title: 'Something went wrong', text: error })
     }
 
     setDeleteTarget(null)
@@ -290,7 +290,7 @@ function ManageUsers() {
 
     URL.revokeObjectURL(url)
 
-    showSuccess('User list exported as CSV.')
+    Swal.fire('User list exported as CSV.')
   }
 
   const selectClass =

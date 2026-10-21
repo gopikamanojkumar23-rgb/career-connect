@@ -69,22 +69,15 @@ export const deleteSubmission = createAsyncThunk(
 const initialState = {
   items: [],
   status: "idle",
-  error: null,
 };
 
 const submissionSlice = createSlice({
   name: "submissions",
   initialState,
-  reducers: {
-    clearSubmissionError: (state) => {
-      state.error = null;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSubmissions.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
 
       .addCase(fetchSubmissions.fulfilled, (state, action) => {
@@ -92,17 +85,12 @@ const submissionSlice = createSlice({
         state.items = action.payload;
       })
 
-      .addCase(fetchSubmissions.rejected, (state, action) => {
+      .addCase(fetchSubmissions.rejected, (state) => {
         state.status = "failed";
-        state.error = action.payload;
       })
 
       .addCase(createSubmission.fulfilled, (state, action) => {
         state.items.push(action.payload);
-      })
-
-      .addCase(createSubmission.rejected, (state, action) => {
-        state.error = action.payload;
       })
 
       .addCase(updateSubmission.fulfilled, (state, action) => {
@@ -115,21 +103,12 @@ const submissionSlice = createSlice({
         }
       })
 
-      .addCase(updateSubmission.rejected, (state, action) => {
-        state.error = action.payload;
-      })
-
       .addCase(deleteSubmission.fulfilled, (state, action) => {
         state.items = state.items.filter(
           (submission) => submission.id !== action.payload,
         );
       })
-
-      .addCase(deleteSubmission.rejected, (state, action) => {
-        state.error = action.payload;
-      });
   },
 });
 
-export const { clearSubmissionError } = submissionSlice.actions;
 export default submissionSlice.reducer;

@@ -22,7 +22,7 @@ import {
   updateStudentItem,
 } from '../../Redux/Slice/studentSlice'
 import { formatDate } from '../../Redux/selectors'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 const courses = [
   'Web Development',
@@ -163,7 +163,11 @@ function AdminStudyPlan() {
           createStudentItem({ type: tab.key, values }),
         ).unwrap()
 
-        showSuccess(`${tab.label.slice(0, -1)} added`, 'The students can see it now.')
+        Swal.fire({
+          icon: 'success',
+          title: `${tab.label.slice(0, -1)} added`,
+          text: 'The students can see it now.',
+        })
       } else {
         await dispatch(
           updateStudentItem({
@@ -173,7 +177,7 @@ function AdminStudyPlan() {
           }),
         ).unwrap()
 
-        showSuccess('Record updated')
+        Swal.fire('Record updated')
       }
 
       closeForm()
@@ -189,7 +193,7 @@ function AdminStudyPlan() {
       deleteStudentItem({ type: tab.key, id: deleteTarget.id }),
     ).unwrap()
 
-    showSuccess('Record removed')
+    Swal.fire('Record removed')
     setDeleteTarget(null)
   }
 

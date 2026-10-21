@@ -60,22 +60,15 @@ export const deleteUser = createAsyncThunk(
 const initialState = {
   items: [],
   status: "idle",
-  error: null,
 };
 
 const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {
-    clearUserError: (state) => {
-      state.error = null;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
 
       .addCase(fetchUsers.fulfilled, (state, action) => {
@@ -83,17 +76,12 @@ const userSlice = createSlice({
         state.items = action.payload;
       })
 
-      .addCase(fetchUsers.rejected, (state, action) => {
+      .addCase(fetchUsers.rejected, (state) => {
         state.status = "failed";
-        state.error = action.payload;
       })
 
       .addCase(createUser.fulfilled, (state, action) => {
         state.items.push(action.payload);
-      })
-
-      .addCase(createUser.rejected, (state, action) => {
-        state.error = action.payload;
       })
 
       .addCase(updateUser.fulfilled, (state, action) => {
@@ -106,19 +94,10 @@ const userSlice = createSlice({
         }
       })
 
-      .addCase(updateUser.rejected, (state, action) => {
-        state.error = action.payload;
-      })
-
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.items = state.items.filter((user) => user.id !== action.payload);
       })
-
-      .addCase(deleteUser.rejected, (state, action) => {
-        state.error = action.payload;
-      });
   },
 });
 
-export const { clearUserError } = userSlice.actions;
 export default userSlice.reducer;

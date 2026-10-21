@@ -2,19 +2,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArrowLeft } from 'lucide-react'
+import Swal from 'sweetalert2'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import {
   clearAuthError,
   login,
   loginWithGoogle,
+  ROLES,
 } from '../Redux/Slice/authSlice'
-import { showError, showSuccess } from '../Services/alert'
-
-const demoAccounts = [
-  { label: 'Admin', email: 'admin@careerconnect.com', password: 'admin123' },
-  { label: 'Student', email: 'aarav.menon@example.com', password: 'aarav123' },
-]
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
@@ -61,7 +57,9 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate(user.role === 'Admin' ? '/admin' : '/dashboard', { replace: true })
+      navigate(user.role === ROLES.ADMIN ? '/admin' : '/dashboard', {
+        replace: true,
+      })
     }
   }, [user, navigate])
 
@@ -70,17 +68,25 @@ function Login() {
       const profile = decodeGoogleProfile(response.credential)
 
       if (!profile) {
-        dispatch(clearAuthError())
+        Swal.fire('Could not read the Google account')
         return
       }
 
       dispatch(loginWithGoogle(profile))
         .unwrap()
         .then((user) => {
-          showSuccess('Signed in with Google', `Welcome back, ${user.name}`)
+          Swal.fire({
+            icon: 'success',
+            title: 'Signed in with Google',
+            text: `Welcome back, ${user.name}`,
+          })
         })
         .catch((error) => {
-          showError('Google sign-in failed', error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Google sign-in failed',
+            text: error,
+          })
         })
     },
     [dispatch],
@@ -138,24 +144,11 @@ function Login() {
     dispatch(login(form))
       .unwrap()
       .then((user) => {
-        showSuccess('Logged in successfully', `Welcome back, ${user.name}`)
-      })
-      .catch(() => {
-        // The form already shows the error message.
-      })
-  }
-
-  function handleDemo(account) {
-    setForm({
-      email: account.email,
-      password: account.password,
-    })
-
-    dispatch(clearAuthError())
-    dispatch(login({ email: account.email, password: account.password }))
-      .unwrap()
-      .then((user) => {
-        showSuccess('Logged in successfully', `Welcome back, ${user.name}`)
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged in successfully',
+          text: `Welcome back, ${user.name}`,
+        })
       })
       .catch(() => {
         // The form already shows the error message.
@@ -249,24 +242,19 @@ function Login() {
             {status === 'loading' ? 'Signing in...' : 'Sign In'}
           </button>
 
-          <div className="flex items-center gap-3">
-            <span className="h-px flex-1 bg-neutral-800" />
-            <span className="text-xs text-neutral-500">or</span>
-            <span className="h-px flex-1 bg-neutral-800" />
-          </div>
+          {googleClientId && (
+            <>
+              <div className="flex items-center gap-3">
+                <span className="h-px flex-1 bg-neutral-800" />
+                <span className="text-xs text-neutral-500">or</span>
+                <span className="h-px flex-1 bg-neutral-800" />
+              </div>
 
-          <div className="flex min-h-[44px] flex-col items-center justify-center">
-            {googleClientId ? (
-              <div ref={googleButtonRef} />
-            ) : (
-              <p className="text-center text-xs leading-relaxed text-neutral-500">
-                Google sign-in needs a client id.
-                <br />
-                Add <span className="text-yellow-400">VITE_GOOGLE_CLIENT_ID</span>{' '}
-                to your .env file to enable it.
-              </p>
-            )}
-          </div>
+              <div className="flex min-h-[44px] items-center justify-center">
+                <div ref={googleButtonRef} />
+              </div>
+            </>
+          )}
 
           <p className="text-center text-sm text-neutral-400">
             New to CareerConnect?{' '}
@@ -275,26 +263,6 @@ function Login() {
             </Link>
           </p>
         </form>
-
-        <div className="mt-6 rounded-xl border border-neutral-800 bg-neutral-900 p-5">
-          <p className="text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-            Demo accounts
-          </p>
-
-          <div className="mt-4 space-y-2">
-            {demoAccounts.map((account) => (
-              <button
-                key={account.email}
-                type="button"
-                onClick={() => handleDemo(account)}
-                className="flex w-full items-center justify-between rounded-lg border border-neutral-800 px-3 py-2 text-sm text-neutral-300 transition hover:border-yellow-400 hover:text-yellow-400"
-              >
-                <span className="font-medium">{account.label}</span>
-                <span className="text-xs text-neutral-500">{account.email}</span>
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   )

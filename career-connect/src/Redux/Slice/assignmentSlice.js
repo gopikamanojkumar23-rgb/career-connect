@@ -75,11 +75,6 @@ const initialState = {
 const assignmentSlice = createSlice({
   name: "assignments",
   initialState,
-  reducers: {
-    clearAssignmentError: (state) => {
-      state.error = null;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAssignments.pending, (state) => {
@@ -131,5 +126,4 @@ const assignmentSlice = createSlice({
   },
 });
 
-export const { clearAssignmentError } = assignmentSlice.actions;
 export default assignmentSlice.reducer;

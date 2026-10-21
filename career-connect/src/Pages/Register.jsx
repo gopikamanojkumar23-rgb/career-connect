@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArrowLeft } from 'lucide-react'
+import Swal from 'sweetalert2'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { clearAuthError, register } from '../Redux/Slice/authSlice'
-import { showSuccess } from '../Services/alert'
+import { clearAuthError, register, ROLES } from '../Redux/Slice/authSlice'
 
 const courses = [
   'Web Development',
@@ -26,11 +26,11 @@ function Register() {
     email: '',
     password: '',
     phone: '',
+    role: ROLES.STUDENT,
     course: courses[0],
   })
 
   const [registered, setRegistered] = useState(false)
-  const [formError, setFormError] = useState('')
 
   useEffect(() => {
     if (registered) {
@@ -55,11 +55,19 @@ function Register() {
     try {
       await dispatch(register(form)).unwrap()
 
-      showSuccess('Account created', 'Sign in to continue to your dashboard.')
+      Swal.fire({
+        icon: 'success',
+        title: 'Account created',
+        text: 'Sign in to continue.',
+      })
+
       setRegistered(true)
     } catch (error) {
-      dispatch(clearAuthError())
-      setFormError(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Could not create the account',
+        text: error,
+      })
     }
   }
 
@@ -88,7 +96,7 @@ function Register() {
           <div>
             <h1 className="text-2xl font-bold text-white">Create your account</h1>
             <p className="mt-2 text-sm text-neutral-400">
-              Join as a student and start your assignments.
+              Register as a student or as an admin.
             </p>
           </div>
 
@@ -151,6 +159,49 @@ function Register() {
 
           <div>
             <label
+              htmlFor="role"
+              className="mb-2 block text-sm text-neutral-300"
+            >
+              Register as
+            </label>
+            <select
+              id="role"
+              name="role"
+              value={form.role}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-neutral-700 bg-black p-3 text-white outline-none focus:border-yellow-400"
+            >
+              <option value={ROLES.STUDENT}>Student</option>
+              <option value={ROLES.ADMIN}>Admin</option>
+            </select>
+          </div>
+
+          {form.role === ROLES.STUDENT && (
+            <div>
+              <label
+                htmlFor="course"
+                className="mb-2 block text-sm text-neutral-300"
+              >
+                Course / Track
+              </label>
+              <select
+                id="course"
+                name="course"
+                value={form.course}
+                onChange={handleChange}
+                className="w-full rounded-lg border border-neutral-700 bg-black p-3 text-white outline-none focus:border-yellow-400"
+              >
+                {courses.map((course) => (
+                  <option key={course} value={course}>
+                    {course}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          <div>
+            <label
               htmlFor="phone"
               className="mb-2 block text-sm text-neutral-300"
             >
@@ -166,37 +217,9 @@ function Register() {
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="course"
-              className="mb-2 block text-sm text-neutral-300"
-            >
-              Course / Track
-            </label>
-            <select
-              id="course"
-              name="course"
-              value={form.course}
-              onChange={handleChange}
-              className="w-full rounded-lg border border-neutral-700 bg-black p-3 text-white outline-none focus:border-yellow-400"
-            >
-              {courses.map((course) => (
-                <option key={course} value={course}>
-                  {course}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {error && (
             <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">
               {error}
-            </p>
-          )}
-
-          {formError && (
-            <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-400">
-              {formError}
             </p>
           )}
 

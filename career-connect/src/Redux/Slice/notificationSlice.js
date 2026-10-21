@@ -70,22 +70,15 @@ export const deleteNotification = createAsyncThunk(
 const initialState = {
   items: [],
   status: "idle",
-  error: null,
 };
 
 const notificationSlice = createSlice({
   name: "notifications",
   initialState,
-  reducers: {
-    clearNotificationError: (state) => {
-      state.error = null;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNotifications.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
 
       .addCase(fetchNotifications.fulfilled, (state, action) => {
@@ -93,17 +86,12 @@ const notificationSlice = createSlice({
         state.items = action.payload;
       })
 
-      .addCase(fetchNotifications.rejected, (state, action) => {
+      .addCase(fetchNotifications.rejected, (state) => {
         state.status = "failed";
-        state.error = action.payload;
       })
 
       .addCase(createNotification.fulfilled, (state, action) => {
         state.items.unshift(action.payload);
-      })
-
-      .addCase(createNotification.rejected, (state, action) => {
-        state.error = action.payload;
       })
 
       .addCase(updateNotification.fulfilled, (state, action) => {
@@ -116,21 +104,12 @@ const notificationSlice = createSlice({
         }
       })
 
-      .addCase(updateNotification.rejected, (state, action) => {
-        state.error = action.payload;
-      })
-
       .addCase(deleteNotification.fulfilled, (state, action) => {
         state.items = state.items.filter(
           (notification) => notification.id !== action.payload,
         );
       })
-
-      .addCase(deleteNotification.rejected, (state, action) => {
-        state.error = action.payload;
-      });
   },
 });
 
-export const { clearNotificationError } = notificationSlice.actions;
 export default notificationSlice.reducer;

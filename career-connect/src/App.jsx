@@ -29,6 +29,8 @@ import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 
+import { ROLES } from './Redux/Slice/authSlice'
+
 function App() {
   return (
     <BrowserRouter>
@@ -54,7 +56,7 @@ function App() {
 
         <Route
           element={
-            <ProtectedRoute allowedRoles={['Admin']}>
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
               <AdminLayout />
             </ProtectedRoute>
           }

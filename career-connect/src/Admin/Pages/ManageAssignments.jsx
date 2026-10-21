@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 import { deleteAssignment } from '../../Redux/Slice/assignmentSlice'
 import { formatDate, getAssignmentProgress } from '../../Redux/selectors'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 function ManageAssignments() {
   const dispatch = useDispatch()
@@ -42,7 +42,7 @@ function ManageAssignments() {
 
     await dispatch(deleteAssignment(deleteTarget.id)).unwrap()
 
-    showSuccess('Assignment removed')
+    Swal.fire('Assignment removed')
 
     setDeleteTarget(null)
   }

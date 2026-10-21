@@ -77,22 +77,15 @@ const initialState = {
   tasks: [],
   projects: [],
   status: "idle",
-  error: null,
 };
 
 const studentSlice = createSlice({
   name: "student",
   initialState,
-  reducers: {
-    clearStudentError: (state) => {
-      state.error = null;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchStudentContent.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
 
       .addCase(fetchStudentContent.fulfilled, (state, action) => {
@@ -102,19 +95,14 @@ const studentSlice = createSlice({
         state.projects = action.payload.projects;
       })
 
-      .addCase(fetchStudentContent.rejected, (state, action) => {
+      .addCase(fetchStudentContent.rejected, (state) => {
         state.status = "failed";
-        state.error = action.payload;
       })
 
       .addCase(createStudentItem.fulfilled, (state, action) => {
         const { type, item } = action.payload;
 
         state[type].push(item);
-      })
-
-      .addCase(createStudentItem.rejected, (state, action) => {
-        state.error = action.payload;
       })
 
       .addCase(updateStudentItem.fulfilled, (state, action) => {
@@ -126,21 +114,12 @@ const studentSlice = createSlice({
         }
       })
 
-      .addCase(updateStudentItem.rejected, (state, action) => {
-        state.error = action.payload;
-      })
-
       .addCase(deleteStudentItem.fulfilled, (state, action) => {
         const { type, id } = action.payload;
 
         state[type] = state[type].filter((row) => row.id !== id);
       })
-
-      .addCase(deleteStudentItem.rejected, (state, action) => {
-        state.error = action.payload;
-      });
   },
 });
 
-export const { clearStudentError } = studentSlice.actions;
 export default studentSlice.reducer;

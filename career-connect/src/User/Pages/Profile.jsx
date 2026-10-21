@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { updateUser } from '../../Redux/Slice/userSlice'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 const courses = [
   'Web Development',
@@ -52,7 +52,11 @@ function ProfileForm({ user }) {
         }),
       ).unwrap()
 
-      showSuccess('Profile saved', 'The admin panel sees the same record.')
+      Swal.fire({
+        icon: 'success',
+        title: 'Profile saved',
+        text: 'The admin panel sees the same record.',
+      })
 
       setSaved(true)
     } catch (error) {

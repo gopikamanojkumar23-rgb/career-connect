@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { logout } from '../../Redux/Slice/authSlice'
-import { showSuccess } from '../../Services/alert'
+import Swal from 'sweetalert2'
 
 function UserHeader() {
   const dispatch = useDispatch()
@@ -13,7 +13,11 @@ function UserHeader() {
   function handleLogout() {
     dispatch(logout())
 
-    showSuccess('Signed out', 'See you again soon.')
+    Swal.fire({
+      icon: 'success',
+      title: 'Signed out',
+      text: 'See you again soon.',
+    })
     navigate('/login')
   }
 

@@ -59,9 +59,17 @@ password form only.
 | Admin   | `admin@careerconnect.com`  | `admin123`  |
 | Student | `aarav.menon@example.com`  | `aarav123`  |
 
-The login page has one click buttons for both. Google sign-in reuses an
-existing account when the email matches, and creates a student account
-otherwise.
+## Signing in
+
+| Role    | Email                      | Password    |
+| ------- | -------------------------- | ----------- |
+| Admin   | `admin@careerconnect.com`  | `admin123`  |
+| Student | `aarav.menon@example.com`  | `aarav123`  |
+
+The register page lets you pick **Student** or **Admin**, and the role is
+saved on the account, so you land on the matching dashboard after signing in.
+Google sign-in reuses an existing account when the email matches, and creates
+a student account otherwise.
 
 ## How the two sides stay in sync
 
