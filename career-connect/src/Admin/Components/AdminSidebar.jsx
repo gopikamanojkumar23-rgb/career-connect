@@ -1,4 +1,4 @@
-import { Bell, CalendarClock, ClipboardList, FileBarChart, FileCheck, LayoutDashboard, MessageSquare, TrendingUp, Users, X } from 'lucide-react'
+import { Bell, CalendarClock, ClipboardList, FileCheck, LayoutDashboard, MessageSquare, TrendingUp, Users, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 
 const menuItems = [
@@ -10,7 +10,6 @@ const menuItems = [
   { name: 'Progress', path: '/admin/progress', icon: TrendingUp },
   { name: 'Notifications', path: '/admin/notifications', icon: Bell },
   { name: 'Feedback', path: '/admin/feedback', icon: MessageSquare },
-  { name: 'Reports', path: '/admin/reports', icon: FileBarChart },
 ]
 
 function AdminSidebar({ isOpen = false, onClose }) {

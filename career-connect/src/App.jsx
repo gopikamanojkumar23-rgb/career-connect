@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import './App.css'
 import ProtectedRoute from './Components/ProtectedRoute'
@@ -7,7 +7,6 @@ import AdminDashboard from './Admin/Pages/AdminDashboard'
 import AdminFeedback from './Admin/Pages/AdminFeedback'
 import AdminNotifications from './Admin/Pages/AdminNotifications'
 import AdminProgress from './Admin/Pages/AdminProgress'
-import AdminReports from './Admin/Pages/AdminReports'
 import AdminStudyPlan from './Admin/Pages/AdminStudyPlan'
 import CreateAssignments from './Admin/Pages/CreateAssignments'
 import ManageAssignments from './Admin/Pages/ManageAssignments'
@@ -66,7 +65,7 @@ function App() {
           <Route path="/admin/progress" element={<AdminProgress />} />
           <Route path="/admin/notifications" element={<AdminNotifications />} />
           <Route path="/admin/feedback" element={<AdminFeedback />} />
-          <Route path="/admin/reports" element={<AdminReports />} />
+          <Route path="/admin/*" element={<Navigate to="/admin" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

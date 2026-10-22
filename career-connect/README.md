@@ -99,7 +99,7 @@ src/
   Admin/
     Components/   AdminHeader, AdminSidebar, AdminLayout, AdminUI
     Pages/        Dashboard, Users, Assignments, Study Plan, Submissions,
-                  Progress, Notifications, Feedback, Reports
+                  Progress, Notifications, Feedback
   User/
     Components/   UserHeader, UserSidebar, UserLayout
     Pages/        Dashboard, MyAssignments, MyProgress, Notifications,
