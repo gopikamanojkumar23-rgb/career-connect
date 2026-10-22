@@ -109,6 +109,17 @@
       "status": "Active",
       "joined": "2026-10-21",
       "id": 10
+    },
+    {
+      "name": "Arjun",
+      "email": "aarrjjuunn44@gmail.com",
+      "password": "123456",
+      "phone": "",
+      "course": "Web Development",
+      "role": "Admin",
+      "status": "Active",
+      "joined": "2026-10-21",
+      "id": 11
     }
   ],
   "assignments": [
@@ -197,7 +208,7 @@
       "description": "Consumed the JSONPlaceholder API with retry and error handling.",
       "link": "https://github.com/rahul/api-task",
       "submittedAt": "2026-10-16",
-      "status": "Completed",
+      "status": "Submitted",
       "feedback": "Excellent API error handling. Keep it up.",
       "rating": 5
     },
